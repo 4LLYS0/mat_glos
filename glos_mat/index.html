@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glossário Matemático</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <aside class="sidebar">
+
+            <input type="text" id="searchBar" placeholder="Pesquisar termos..." onkeyup="searchTerms()">
+            <button onclick="sortTerms()">Ordenar A-Z</button>
+            <a href="login.html">Login</a>
+        </aside>
+
+        <h1>Glossário Matemático</h1>
+        
+        <main class="content">
+            <ul id="termsList">
+                <!-- Lista de termos será carregada aqui -->
+            </ul>
+        </main>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

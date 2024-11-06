@@ -1,0 +1,207 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #F2ECE4; /* Fundo em tom bege claro */
+    color: #26231F; /* Marrom escuro para o texto */
+}
+
+/* Estilo do cabeçalho */
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #4747DB; /* Azul suave */
+    border-bottom: 2px solid #26231F; /* Marrom escuro */
+}
+
+h1 {
+    color: #26231F; /* Marrom escuro */
+    margin-bottom: 15px;
+}
+
+#searchBar {
+    padding: 10px;
+    width: 300px;
+    border: 2px solid #4747DB; /* Azul suave */
+    border-radius: 4px;
+    background-color: #F2ECE4; /* Fundo bege claro */
+    color: #26231F;
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 8px 15px;
+    margin: 5px;
+    background-color: #4747DB; /* Azul suave */
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #26231F; /* Marrom escuro */
+}
+
+a {
+    color: #26231F; /* Marrom escuro */
+    text-decoration: none;
+    margin-top: 10px;
+}
+
+a:hover {
+    color: #4747DB; /* Azul suave */
+}
+
+/* Estilo da lista de termos */
+ul#termsList {
+    list-style-type: none;
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+li.term-item {
+    padding: 15px;
+    margin-bottom: 10px;
+    background-color: #F2ECE4; /* Fundo bege claro */
+    border: 1px solid #4747DB; /* Azul suave */
+    border-radius: 4px;
+}
+
+li.term-item strong {
+    color: #26231F; /* Marrom escuro */
+}
+
+/* Estilo da página de login/cadastro */
+.login-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #4747DB; /* Fundo azul suave */
+    border: 1px solid #26231F; /* Marrom escuro */
+    border-radius: 4px;
+}
+
+.login-container h2 {
+    color: #26231F; /* Marrom escuro */
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.login-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-container input {
+    padding: 10px;
+    margin: 10px 0;
+    border: 2px solid #4747DB; /* Azul suave */
+    border-radius: 4px;
+    background-color: #F2ECE4; /* Fundo bege claro */
+    color: #26231F;
+}
+
+.login-container button {
+    padding: 10px;
+    background-color: #26231F; /* Marrom escuro */
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.login-container button:hover {
+    background-color: #4747DB; /* Azul suave */
+}
+
+/* Container principal para organizar sidebar e conteúdo */
+.container {
+    display: flex;
+    height: 100vh; /* Usado para preencher a tela */
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    width: 250px;
+    background-color: #4747DB; /* Novo tom de azul */
+    color: #26231F; /* Texto em marrom escuro */
+    border-right: 2px solid #26231F;
+}
+
+.sidebar h1 {
+    color: #26231F;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#searchBar {
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 15px;
+    border: 2px solid #4747DB; /* Novo tom de azul */
+    border-radius: 4px;
+    background-color: #F2ECE4;
+    color: #26231F;
+}
+
+button {
+    padding: 8px 15px;
+    margin-bottom: 15px;
+    width: 100%;
+    background-color: #26231F;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #4747DB; /* Novo tom de azul */
+    color: #26231F;
+}
+
+a {
+    color: #F2ECE4;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+a:hover {
+    color: #26231F;
+}
+
+.content {
+    flex: 1;
+    padding: 20px;
+    background-color: #F2ECE4;
+}
+
+ul#termsList {
+    list-style-type: none;
+    padding: 0;
+}
+
+li.term-item {
+    padding: 15px;
+    margin-bottom: 10px;
+    background-color: #F2ECE4;
+    border: 1px solid #4747DB; /* Novo tom de azul */
+    border-radius: 4px;
+}
+
+li.term-item strong {
+    color: #26231F;
+}
