@@ -1,38 +1,110 @@
-const termsList = document.getElementById('termsList');
-const terms = [
-    { name: 'Álgebra', description: 'Estudo de estruturas matemáticas.' },
-    { name: 'Binômio', description: 'Expressão algébrica com dois termos.' },
-    // Adicione mais termos
+const sidebar = document.querySelector('.sidebar');
+const toggleButton = document.getElementById('toggle-sidebar-button');
+const modeToggle = document.getElementById('mode-toggle');
+const termosLista = document.getElementById('termos-lista');
+const btnAddTerm = document.getElementById('btn-add-term');
+const addTermForm = document.getElementById('addTermForm');
+
+const termos = [
+    { nome: 'Álgebra', descricao: 'Ramo da matemática que lida com símbolos e regras para manipular esses símbolos.' },
+    { nome: 'Geometria', descricao: 'Estudo das propriedades e relações de pontos, linhas, superfícies e sólidos.' },
+    { nome: 'Cálculo', descricao: 'Ramo da matemática focado em limites, derivadas, integrais e séries infinitas.' },
+    { nome: 'Trigonometria', descricao: 'Estudo das relações entre os ângulos e os comprimentos dos triângulos.' }
 ];
 
+// Alternar a sidebar e mudar o botão para "+" ou "Adicionar"
+toggleButton.addEventListener('click', () => {
+    sidebar.classList.toggle('collapsed');
+    toggleButton.textContent = sidebar.classList.contains('collapsed') ? '❯' : '❮';
+    btnAddTerm.textContent = sidebar.classList.contains('collapsed') ? '+' : 'Adicionar';
+});
 
-
-// Função para exibir os termos
-function displayTerms() {
-    termsList.innerHTML = '';
-    terms.forEach(term => {
-        let li = document.createElement('li');
-        li.className = 'term-item';
-        li.innerHTML = `<strong>${term.name}</strong>: ${term.description}`;
-        termsList.appendChild(li);
-    });
+// Atualizar a lista de termos com botões de editar e excluir
+function atualizarLista() {
+    termosLista.innerHTML = termos
+        .sort((a, b) => a.nome.localeCompare(b.nome))
+        .map((termo, index) => `
+            <div class="termo">
+                <h2>${termo.nome}</h2>
+                <p>${termo.descricao}</p>
+                <div class="termo-buttons">
+                    <button onclick="editTerm(${index})" class="btn-edit">Editar</button>
+                    <button onclick="deleteTerm(${index})" class="btn-delete">Excluir</button>
+                </div>
+            </div>
+        `).join('');
 }
 
+// Filtrar termos com base na busca
 function searchTerms() {
     const query = document.getElementById('searchBar').value.toLowerCase();
-    termsList.innerHTML = '';
-    terms.filter(term => term.name.toLowerCase().includes(query)).forEach(term => {
-        let li = document.createElement('li');
-        li.className = 'term-item';
-        li.innerHTML = `<strong>${term.name}</strong>: ${term.description}`;
-        termsList.appendChild(li);
-    });
+    const termosFiltrados = termos.filter(termo => termo.nome.toLowerCase().includes(query));
+    termosLista.innerHTML = termosFiltrados
+        .map((termo, index) => `
+            <div class="termo">
+                <h2>${termo.nome}</h2>
+                <p>${termo.descricao}</p>
+                <div class="termo-buttons">
+                    <button onclick="editTerm(${index})" class="btn-edit">Editar</button>
+                    <button onclick="deleteTerm(${index})" class="btn-delete">Excluir</button>
+                </div>
+            </div>
+        `).join('');
 }
 
-function sortTerms() {
-    terms.sort((a, b) => a.name.localeCompare(b.name));
-    displayTerms();
+// Exibir o formulário de adição de termo
+btnAddTerm.addEventListener('click', () => {
+    addTermForm.style.display = 'block';
+});
+
+// Fechar o formulário de adição de termo
+function closeForm() {
+    addTermForm.style.display = 'none';
+    document.getElementById('termName').value = '';
+    document.getElementById('termDescription').value = '';
 }
 
-// Inicializar a lista ao carregar a página
-window.onload = displayTerms;
+// Adicionar um novo termo
+function addTerm() {
+    const termName = document.getElementById('termName').value.trim();
+    const termDescription = document.getElementById('termDescription').value.trim();
+
+    if (termName && termDescription) {
+        termos.push({ nome: termName, descricao: termDescription });
+        atualizarLista();
+        closeForm();
+    }
+}
+
+// Editar um termo existente
+function editTerm(index) {
+    const termo = termos[index];
+    document.getElementById('termName').value = termo.nome;
+    document.getElementById('termDescription').value = termo.descricao;
+    addTermForm.style.display = 'block';
+
+    // Atualizar o termo após edição
+    addTermForm.onsubmit = function(event) {
+        event.preventDefault();
+        termos[index] = {
+            nome: document.getElementById('termName').value,
+            descricao: document.getElementById('termDescription').value
+        };
+        atualizarLista();
+        closeForm();
+    };
+}
+
+// Excluir um termo
+function deleteTerm(index) {
+    termos.splice(index, 1);
+    atualizarLista();
+}
+
+// Alternar modo escuro
+modeToggle.addEventListener('change', () => {
+    document.body.classList.toggle('dark-mode');
+});
+
+// Iniciar com a lista de termos atualizada
+atualizarLista();
