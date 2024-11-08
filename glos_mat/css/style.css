@@ -1,0 +1,669 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Varela Round", sans-serif;
+}
+html,body{
+    width: 100%;
+    height: 100%;
+   
+}
+/* Estilo da barra de pesquisa */
+#searchBar {
+    width: calc(100% - 40px);
+    margin: 10px 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #333;
+    background-color: #f5f5f5;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+#searchBar:focus {
+    border-color: #4747DB;
+}
+
+body.dark-mode #searchBar {
+    background-color: #333;
+    color: #ccc;
+    border-color: #555;
+}
+
+body.dark-mode #searchBar:focus {
+    border-color: #4747DB;
+}
+
+/* Dark Mode */
+body.dark-mode {
+    background-color: #333;
+    color: #fff;
+}
+
+body.dark-mode .sidebar {
+    background-color: #1a1a1a;
+}
+
+body.dark-mode .menu li a {
+    color: #ccc;
+}
+
+body.dark-mode .menu li a:hover,
+body.dark-mode .menu li a.active {
+    color: #4747DB;
+}
+
+body.dark-mode .bottom-menu .logout {
+    color: #ccc;
+}
+
+body.dark-mode .mode-switch span {
+    color: #ccc;
+}
+
+body.dark-mode .termo h2,
+body.dark-mode .termo p {
+    color: #ccc;
+}
+
+/* Estilo da Sidebar */
+.toggle-sidebar-button {
+    background-color: #4747DB;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s;
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+
+
+.sidebar {
+    width: 250px;
+    background-color: #fff;
+    transition: width 0.3s;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    height: 100%;
+    overflow: hidden;
+}
+
+.sidebar.collapsed {
+    width: 70px;
+}
+
+.sidebar:hover .toggle-sidebar-button {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.main-content {
+    margin-left: 250px;
+    padding: 20px;
+    transition: margin-left 0.3s;
+    width: calc(100% - 250px);
+}
+
+.sidebar.collapsed~.main-content {
+    margin-left: 70px;
+    width: calc(100% - 70px);
+}
+
+.sidebar.collapsed .logo-text,
+.sidebar.collapsed .menu li a span,
+.sidebar.collapsed .bottom-menu .mode-switch span {
+    display: none;
+}
+
+.sidebar.collapsed #searchBar {
+    display: none;
+}
+
+
+
+.sidebar.collapsed .menu li {
+    display: flex;
+    justify-content: center;
+}
+
+.sidebar.collapsed .menu li a {
+    display: flex;
+    justify-content: center;
+}
+
+.sidebar.collapsed .bottom-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.sidebar .logo {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Centraliza o ícone da logo quando a sidebar está retraída */
+.sidebar.collapsed .logo-icon {
+    display: block;
+    margin: 0 auto;
+}
+
+
+.logo-icon {
+    background-color: #4747DB;
+    color: #fff;
+    padding: 10px;
+    border-radius: 50%;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.logo-text {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
+.sidebar ul.menu {
+    list-style: none;
+    margin-top: 20px;
+}
+
+.menu li {
+    padding: 15px 20px;
+}
+
+.menu li a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+}
+
+.menu li a:hover,
+.menu li a.active {
+    color: #4747DB;
+    border-radius: 8px;
+}
+
+.icon {
+    font-size: 18px;
+}
+
+.bottom-menu {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logout {
+    display: flex;
+    align-items: center;
+    color: #333;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.logout .icon {
+    margin-right: 10px;
+}
+
+.mode-switch {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.mode-switch span {
+    font-size: 16px;
+}
+
+#mode-toggle {
+    transform: scale(1.5);
+}
+
+.main-content {
+    margin-left: 250px;
+    padding: 20px;
+
+}
+
+#addTermForm {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    width: 300px;
+    z-index: 10;
+}
+
+#addTermForm h2 {
+    margin-top: 0;
+    color: #4747DB;
+}
+
+#addTermForm label {
+    display: block;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #333;
+}
+
+#addTermForm input[type="text"],
+#addTermForm textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+#addTermForm button {
+    width: 48%;
+    padding: 10px;
+    margin-top: 15px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+}
+
+#addTermForm button:first-child {
+    background-color: #4747DB;
+    color: #fff;
+}
+
+#addTermForm button:last-child {
+    background-color: #ccc;
+    color: #333;
+    float: right;
+}
+
+/* Estilo das caixas de termos */
+.termo {
+    width: 100%;
+    border: 1px solid #4747DB;
+    padding: 10px;
+    border-radius: 8px;
+    margin: 10px 0;
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+
+.btn-edit {
+    background-color: #4747DB;
+    height: 35px;
+    width: 60px;
+    color: white;
+    border-radius: 3px;
+    font-size: 16px;
+    margin-top: 20px;
+    border: none;
+}
+
+.btn-delete {
+    background-color: #555;
+    height: 35px;
+    width: 60px;
+    color: white;
+    border-radius: 3px;
+    font-size: 16px;
+    margin-top: 20px;
+    border: none;
+}
+
+.termo:hover {
+    transform: scale(1.02);
+}
+
+.termo h2 {
+    font-size: 18px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.icon,
+.bi {
+    font-size: 22px;
+    margin-left: 17px;
+    margin-right: 5px;
+}
+
+/* Estilo do botão de fechar */
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    color: #333;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+
+.termo p {
+    font-size: 14px;
+    color: #666;
+}
+
+.termo h2,
+.termo p {
+    transition: color 0.3s;
+}
+
+#toggle-button {
+    display: none;
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-add {
+    margin-top: 20px;
+    margin-left: 15%;
+    width: 70%;
+    padding: 15px 20px;
+    background-color: #4747DB;
+    color: #fff;
+    border-radius: 8px;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 20px;
+}
+
+#btn-add-term {
+    padding: 10px 20px;
+    background-color: #4747DB;
+    color: #fff;
+    border-radius: 8px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+#btn-add-term:hover {
+    background-color: #3b3ba1;
+  
+}
+
+/* Estilo do formulário de adição */
+.add-term-form {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    width: 300px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+}
+
+.add-term-form h3 {
+    margin-top: 0;
+}
+
+.add-term-form input,
+.add-term-form textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.add-term-form button {
+    padding: 10px;
+    margin-right: 5px;
+    background-color: #4747DB;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.add-term-form button:last-child {
+    background-color: #ccc;
+}
+
+/* Responsive Sidebar */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 70px;
+    }
+
+    .sidebar.collapsed {
+        width: 0;
+    }
+
+    .main-content {
+        margin-left: 70px;
+    }
+
+    #toggle-button {
+        display: block;
+    }
+}
+
+/*/  - - - - - - - - - - - - - - - - -  - - - - -         PÁGINA DE LOGIN        - - - - - -  - - - - - - - - - - - - - - - - -  - - - - - - -  /*/
+
+
+body.login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f3f4f6;
+    color: #333;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 400px;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.login-container h2 {
+    margin-bottom: 20px;
+    font-weight: 500;
+    font-size: 24px;
+    text-align: center;
+    color: #4747DB;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #555;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+    border-color: #4747DB;
+}
+
+.form-group .forgot-password {
+    display: block;
+    margin-top: 10px;
+    font-size: 13px;
+    color: #4747DB;
+    text-align: right;
+    text-decoration: none;
+}
+
+.form-group .forgot-password:hover {
+    text-decoration: underline;
+}
+
+.login-button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #fff;
+    background-color: #4747DB;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.login-button:hover {
+    background-color: #3333BB;
+}
+
+.signup-link {
+    display: block;
+    margin-top: 15px;
+    font-size: 14px;
+    text-align: center;
+    color: #555;
+}
+
+.signup-link a {
+    color: #4747DB;
+    text-decoration: none;
+}
+
+.signup-link a:hover {
+    text-decoration: underline;
+}
+
+/*/  - - - - - - - - - - - - - - - - -  - - - - -         PÁGINA DE CADASTRO        - - - - - -  - - - - - - - - - - - - - - - - -  - - - - - - -  /*/
+
+
+body.cadastro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f3f4f6;
+    color: #333;
+}
+
+.signup-container {
+    width: 100%;
+    max-width: 400px;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.signup-container h2 {
+    margin-bottom: 20px;
+    font-weight: 500;
+    font-size: 24px;
+    text-align: center;
+    color: #4747DB;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #555;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+    border-color: #4747DB;
+}
+
+.signup-button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #fff;
+    background-color: #4747DB;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.signup-button:hover {
+    background-color: #3333BB;
+}
+
+.login-link {
+    display: block;
+    margin-top: 15px;
+    font-size: 14px;
+    text-align: center;
+    color: #555;
+}
+
+.login-link a {
+    color: #4747DB;
+    text-decoration: none;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+#addTermForm{
+    display: none;
+}
