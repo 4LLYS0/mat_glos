@@ -1,7 +1,6 @@
 <?php
 include 'db/conexao.php';
 
-
 // Verifique se o formulário foi enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nome = $_POST['nome'];
@@ -39,7 +38,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bind_param("ssss", $nome, $email, $senha, $foto_perfil);
 
         if ($stmt->execute()) {
-            $sucesso = "Usuário cadastrado com sucesso!";
+            // Se o cadastro for bem-sucedido, redireciona para a página de login
+            header("Location: login.php");
+            exit;
         } else {
             $erro = "Erro ao cadastrar usuário: " . $conn->error;
         }
@@ -62,14 +63,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="signup-container">
         <h2>Cadastro</h2>
 
-        <!-- Exibição de erros ou sucesso -->
-        <?php if ($erro): ?>
-            <div class="error-message"><?= $erro; ?></div>
-        <?php endif; ?>
-        <?php if ($sucesso): ?>
-            <div class="success-message"><?= $sucesso; ?></div>
-        <?php endif; ?>
-
         <form id="formCadastro" method="POST" action="cadastro.php" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="name">Nome</label>
@@ -91,7 +84,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <label for="foto_perfil">Foto de Perfil</label>
                 <input type="file" id="foto_perfil" name="foto_perfil">
             </div>
-            <button type="submit" class="signup-button">Cadastrar</button>
+            <button type="submit" class="signup-button">Cadastrar</button> 
         </form>
         <p class="login-link">Já tem uma conta? <a href="login.php">Faça login</a></p>
     </div>

@@ -68,8 +68,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['termName']) && isset($
         <ul class="menu">
         <input type="text" id="searchBar" placeholder="Pesquisar termos..." onkeyup="searchTerms()">
             <li><a href="../back/index.php "><i class="bi bi-bar-chart-line-fill"></i><span>Dashboard</span></a></li>
-            <li><a href="#"><i class="bi bi-signpost-split-fill"></i> <span>Categoria</span></a></li>
-            <li><a href="#"><i class="bi bi-box"></i> <span>Símbolos</span></a></li>
             <li><a href="#"><i class="bi bi-info-circle"></i> <span>Sobre</span></a></li>
         </ul>
     
@@ -78,13 +76,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['termName']) && isset($
         <div class="bottom-menu">
             <a href="../back/login.php" class="logout"> <span>Login</span></a>
             <div class="mode-switch">
-                <span>Dark Mode</span>
                 <label class="switch-container">
                 <input type="checkbox"  id="mode-toggle" >
                 <span class="slider"></span>
                 </label>
-
-                <input type="checkbox" id="mode-toggle" style="margin-left: 10px;">
             </div>
             <button id="toggle-sidebar-button" class="toggle-sidebar-button">❮</button>
         </div>
@@ -138,7 +133,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['termName']) && isset($
 
 </html>
 <script>
-   const sidebar = document.querySelector('.sidebar');
+    const sidebar = document.querySelector('.sidebar');
     const toggleButton = document.getElementById('toggle-sidebar-button');
     const termosLista = document.getElementById('termos-lista');
     const btnAddTerm = document.getElementById('btn-add-term');
@@ -226,6 +221,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['termName']) && isset($
         `).join('');
     }
 
+    function closeForm() {
+        document.getElementById('addTermForm').style.display = 'none';
+    }
+
     toggleButton.addEventListener('click', () => {
     // Alterna a classe 'collapsed' na sidebar
     sidebar.classList.toggle('collapsed');
@@ -241,8 +240,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['termName']) && isset($
         btnAddTerm.textContent = 'Adicionar'; // Texto do botão de adicionar quando o menu estiver aberto
     }
     });
-
-
 
 </script>
 
